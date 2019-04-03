@@ -21,7 +21,7 @@
 
 
  //  Array of crystal "button" images 
- var images = ["../unit-4-game/assets/images/RedCap.png", "../unit-4-game/assets/images/BlueCap.png", "../unit-4-game/assets/images/YellowCap.png", "../unit-4-game/assets/images/GreenCap.png"];
+ var images = ["assets/images/RedCap.png", "assets/images/BlueCap.png", "assets/images/YellowCap.png", "assets/images/GreenCap.png"];
 
 //Dynamically add crystal "buttons" and associated random values to page
  for (i = 0; i < images.length; i++) {
