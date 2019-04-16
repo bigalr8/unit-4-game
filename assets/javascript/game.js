@@ -34,6 +34,8 @@
      $("#crystals").append(crystal);
  }
 
+ $("#score").html("<h1>" + userscore + "</h3>");
+
  $(".crystalImg").on("click", function() {
  //Retrieve the value of the the specific crystal that was clicked and convert to int
  var thisCrystalVal = ($(this).attr("data-crystal"));
@@ -48,14 +50,17 @@
  if (userscore == winningnumber)  {
      wins++;
      gameover = true;
+     $("#win-lose").html("<h2>You Win!</h2>");
      }
  else if (userscore > winningnumber)  {
      losses++;
      gameover = true;
+     $("#win-lose").html("<h2>You Lose!</h2>");
  }
  if (gameover) {
      $("#wins").html("<h3>" + "Wins: " + wins + "</h3>")
      $("#losses").html("<h3>" + "Losses: " + losses + "</h3>")
+     $("#replay").html("<h2>Replay</h2>")
      return;
  }
      

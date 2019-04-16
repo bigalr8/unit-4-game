@@ -4,6 +4,11 @@
     display: block;
 }
 
+#crystals {
+    margin-right: 0;
+    margin-left: 0;
+}
+
 .crystalImg {
     width: 100px;
     height: 200px;
@@ -24,5 +29,5 @@
 
 #ScoreLabel, #ScoreValue  {
     color: white;
-    background-color: blue;
+    background-color:#007bff;;
 }
