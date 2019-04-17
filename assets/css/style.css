@@ -21,13 +21,32 @@
     box-shadow: 5px 10px 18px #888888;
     margin:2px;
 }
+/*"assets/images/RedCap.PNG", "assets/images/BlueCap.PNG", "assets/images/YellowCap.PNG", "assets/images/GreenCap.PNG" 
+.btn0 {
+    background-image:"assets/images/RedCap.PNG";
+    background-repeat:no-repeat;
+    }
 
+.btn1 {
+    background-image:url('http://www.w3.org/html/logo/downloads/HTML5_Logo_32.png');
+    background-repeat:no-repeat;
+    }
+
+.btn2 {
+    background-image:url('http://www.w3.org/html/logo/downloads/HTML5_Logo_32.png');
+    background-repeat:no-repeat;
+    }
+.btn3 {
+    background-image:url('http://www.w3.org/html/logo/downloads/HTML5_Logo_32.png');
+    background-repeat:no-repeat;
+    }
+*/
 #goal {
-    font-style: italic;
-    background-color: green;
+    /*font-style: italic;*/
+    background-color: #007bff;
 }
 
 #ScoreLabel, #ScoreValue  {
     color: white;
-    background-color:#007bff;;
+    background-color:#007bff;
 }

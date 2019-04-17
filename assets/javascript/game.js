@@ -1,73 +1,101 @@
- // Done. The random number shown at the start of the game should be between 19 - 120.
- var winningnumber = Math.floor(Math.random() * 120) + 19;
-        
-
- var userscore = 0;
- var wins = 0;
- var losses = 0;
-
- //Done. The player will be shown a random number at the start of the game.
- //console.log("winning: " + winningnumber);
- $("#goal").text(winningnumber);
-
- // Array of crystal values
- var crystalValue = [];
  
- //Done. Each crystal should have a random hidden value between 1 - 12.
- for (i = 0; i < 4; i++) {
-     crystalValue[i] = Math.floor(Math.random() * 12) + 1;
-  //   console.log("value " + i + ";" + crystalValue[i]);
- }
+var winningnumber = 0; 
+var userscore = 0;
+var wins = 0;
+var losses = 0;
+var gameover = false;
+// Array of crystal values
+var crystalValue = [];
+
+function genValues () {
+//   The random number shown at the start of the game should be between 19 - 120.
+     winningnumber = Math.floor(Math.random() * 120) + 19;
+//   Each crystal should have a random hidden value between 1 - 12.
+     for (i = 0; i < 4; i++) {
+        crystalValue[i] = Math.floor(Math.random() * 12) + 1;
+        //   console.log("value " + i + ";" + crystalValue[i]);
+        $("#goal").text(winningnumber);
+    }
+}
+
+genValues();
+
+//  The player will be shown a random number at the start of the game.
 
 
- //  Array of crystal "button" images 
- var images = ["assets/images/RedCap.PNG", "assets/images/BlueCap.PNG", "assets/images/YellowCap.PNG", "assets/images/GreenCap.PNG"];
+
+
+
+
+//  Array of crystal "button" images 
+var images = ["assets/images/RedCap.PNG", "assets/images/BlueCap.PNG", "assets/images/YellowCap.PNG", "assets/images/GreenCap.PNG"];
 
 //Dynamically add crystal "buttons" and associated random values to page
- for (i = 0; i < images.length; i++) {
-     var crystal = $("<img>");
-     crystal.addClass("crystalImg");
-     crystal.attr("src", images[i]);
-     crystal.attr("data-crystal", crystalValue[i]);
-  //   console.log("img tag" + crystal);
-       console.log("value " + i + ": " + crystalValue[i]);
-     $("#crystals").append(crystal);
- }
+for (i = 0; i < images.length; i++) {
+    var crystal = $("<button>");
+    crystal.addClass("crystalBtn");
+    crystal.attr("data-crystal", crystalValue[i]);
 
- $("#score").html("<h1>" + userscore + "</h3>");
+    var image = $("<img>");
+    image.addClass("crystalImg");
+    image.attr("src", images[i]);
+         
+    crystal.append(image);
+    $("#crystals").append(crystal);
+}
 
- $(".crystalImg").on("click", function() {
- //Retrieve the value of the the specific crystal that was clicked and convert to int
- var thisCrystalVal = ($(this).attr("data-crystal"));
-   console.log("thisCrystalVal from data: " + thisCrystalVal);
- thisCrystalVal = parseInt(thisCrystalVal);
- //console.log("thisCrystalVal: " + thisCrystalVal);
- userscore += thisCrystalVal;
- //console.log("userscore: " + userscore);
-     $("#score").html("<h1>" + userscore + "</h3>");
- 
+$("#score").html("<h1>" + userscore + "</h3>");
 
- if (userscore == winningnumber)  {
-     wins++;
-     gameover = true;
-     $("#win-lose").html("<h2>You Win!</h2>");
-     }
- else if (userscore > winningnumber)  {
-     losses++;
-     gameover = true;
-     $("#win-lose").html("<h2>You Lose!</h2>");
- }
- if (gameover) {
-     $("#wins").html("<h3>" + "Wins: " + wins + "</h3>")
-     $("#losses").html("<h3>" + "Losses: " + losses + "</h3>")
-     $("#replay").html("<h2>Replay</h2>")
-     return;
- }
-     
-     
+function renderReplay() {
+    var replayButton = $("<button>");
+    replayButton.text("REPLAY");
+    replayButton.addClass("btn btn-primary btn-lg");
+    replayButton.attr("ID", "replay");
+    $("#replay-button-anchor").append(replayButton);
+}
 
-     
 
- 
+renderReplay();
 
+$(".crystalBtn").on("click", function () {
+    //Retrieve the value of the the specific crystal that was clicked and convert to int
+    var thisCrystalVal = ($(this).attr("data-crystal"));
+    console.log("thisCrystalVal from data: " + thisCrystalVal);
+    thisCrystalVal = parseInt(thisCrystalVal);
+    console.log("thisCrystalVal: " + thisCrystalVal);
+    userscore += thisCrystalVal;
+    console.log("userscore: " + userscore);
+    $("#score").html("<h1>" + userscore + "</h3>");
+
+
+    if (userscore == winningnumber) {
+        console.log("winningnumber: " + winningnumber);
+        wins++;
+        gameover = true;
+        $("#win-lose").html("<h2>You Win!</h2>");
+        //renderReplay();
+    }
+    else if (userscore > winningnumber) {
+        losses++;
+        gameover = true;
+        $("#win-lose").html("<h2>You Lose!</h2>");
+        //renderReplay();
+    }
+    if (gameover) {
+        $("#wins").html("<h3>" + "Wins: " + wins + "</h3>")
+        $("#losses").html("<h3>" + "Losses: " + losses + "</h3>")
+        $('.crystalBtn').prop('disabled', true);
+        $('#replay').prop('disabled', false);
+             return;
+    }
+
+});
+
+$("#replay").on("click", function () {
+    genValues();
+    $('.crystalBtn').prop('disabled', false);
+    $('#replay').prop('disabled', true);
+    userscore = 0;
+    $("#score").html("<h1>" + userscore + "</h3>");
+    gameover = false;
 });
